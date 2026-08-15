@@ -1,6 +1,3 @@
-
-
-
 ```markdown
 # Application d'émissions de streaming — Flutter
 
@@ -124,7 +121,7 @@ Ce flux garantit que :
 
 *(Emplacement réservé pour le schéma illustrant ces échanges — insère ton image ci-dessous)*
 
-`![Schéma des échanges entre couches](assets\images\schema_mvc_streaming.png)`
+![Schéma des échanges entre couches](assets\images\schema_mvc_streaming.png)
 
 ---
 
@@ -159,3 +156,4 @@ flutter run
 3. **Écran de détail** : vérifier l'affichage du nom, de la chaîne, et de 5 diffusions avec dates et icônes volume.
 4. **Retour** : le bouton retour doit ramener à l'écran d'accueil avec l'animation Hero inverse.
 5. **BottomNavigationBar** : vérifier que les 3 icônes (Accueil, Recherche, Profil) sont visibles et cliquables, sans navigation fonctionnelle complète entre les onglets.
+6. **Video de demonstration**: ![video](assets\video\Demo de l'application .mp4)
