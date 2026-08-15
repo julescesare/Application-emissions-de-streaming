@@ -1,36 +1,20 @@
 import 'package:flutter/material.dart';
-import 'album_streaming.dart';
+import '../models/emission.dart';
 
 class IdentificationStreaming extends StatelessWidget {
-  final String tagStream;
-  final String imageStream;
-  final String nomStream;
-  final String chaineRadio;
+  final Emission emission;
+  final VoidCallback onTap;
 
   const IdentificationStreaming({
     super.key,
-    required this.tagStream,
-    required this.imageStream,
-    required this.nomStream,
-    required this.chaineRadio,
+    required this.emission,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => AlbumStreaming(
-              tagStream: tagStream,
-              imageStream: imageStream,
-              nomStream: nomStream,
-              chaineRadio: chaineRadio,
-            ),
-          ),
-        );
-      },
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -50,9 +34,9 @@ class IdentificationStreaming extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Hero(
-                tag: tagStream,
+                tag: emission.tagStream,
                 child: Image.asset(
-                  imageStream,
+                  emission.imagePath,
                   height: 100,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -64,18 +48,13 @@ class IdentificationStreaming extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      nomStream,
+                      emission.nom,
                       style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
-                      ),
+                          fontWeight: FontWeight.bold, fontSize: 13),
                     ),
                     Text(
-                      chaineRadio,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 11,
-                      ),
+                      emission.chaineRadio,
+                      style: const TextStyle(color: Colors.grey, fontSize: 11),
                     ),
                   ],
                 ),

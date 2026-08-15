@@ -1,48 +1,24 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+import '../models/emission.dart';
 
 class AlbumStreaming extends StatelessWidget {
-  final String tagStream;
-  final String imageStream;
-  final String nomStream;
-  final String chaineRadio;
+  final Emission emission;
 
-  const AlbumStreaming({
-    super.key,
-    required this.tagStream,
-    required this.imageStream,
-    required this.nomStream,
-    required this.chaineRadio,
-  });
-
-  // Génère une liste de 5 diffusions avec des dates aléatoires
-  List<Map<String, dynamic>> _genererDiffusions() {
-    final random = Random();
-    return List.generate(5, (index) {
-      final annee = 2023;
-      final mois = random.nextInt(12) + 1;
-      final jour = random.nextInt(28) + 1;
-      return {
-        'numero': index + 1,
-        'date': '$annee-$mois-$jour',
-      };
-    });
-  }
+  const AlbumStreaming({super.key, required this.emission});
 
   @override
   Widget build(BuildContext context) {
-    final diffusions = _genererDiffusions();
+    final diffusions = emission.genererDiffusions();
 
     return Scaffold(
       body: Column(
         children: [
-          // Image de fond avec bouton retour et coeur superposés
           Stack(
             children: [
               Hero(
-                tag: tagStream,
+                tag: emission.tagStream,
                 child: Image.asset(
-                  imageStream,
+                  emission.imagePath,
                   height: 280,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -70,7 +46,6 @@ class AlbumStreaming extends StatelessWidget {
               ),
             ],
           ),
-          // Bandeau titre
           Container(
             width: double.infinity,
             color: Colors.deepPurple,
@@ -79,21 +54,19 @@ class AlbumStreaming extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  nomStream,
+                  emission.nom,
                   style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  chaineRadio,
+                  emission.chaineRadio,
                   style: const TextStyle(color: Colors.white70, fontSize: 13),
                 ),
               ],
             ),
           ),
-          // Liste des diffusions
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -105,11 +78,11 @@ class AlbumStreaming extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
                   child: Row(
                     children: [
-                      Text('Diffusion ${diffusion['numero']} - '),
+                      Text('Diffusion ${diffusion.numero} - '),
                       const Icon(Icons.volume_up,
                           size: 18, color: Colors.deepPurple),
                       const SizedBox(width: 8),
-                      Text('Date: ${diffusion['date']}'),
+                      Text('Date: ${diffusion.dateFormatee}'),
                     ],
                   ),
                 );
